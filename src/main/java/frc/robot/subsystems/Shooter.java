@@ -7,29 +7,53 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-public class Shooter extends SubsystemBase {
+public class shooter extends SubsystemBase {
 
-    SparkMax m_intakeLowerMotor = new SparkMax(3, MotorType.kBrushless); //upper intake motor
-    SparkMax m_intakeUpperMotor = new SparkMax(4, MotorType.kBrushless); //lower intake motor
+    SparkMax m_shooterMotor = new SparkMax(4, MotorType.kBrushed); //upper shooter motor
+    SparkMax m_intakeMotor = new SparkMax(3, MotorType.kBrushed); // intake motor
+
+    SparkMaxConfig intakeConfig = new SparkMaxConfig();
+    SparkMaxConfig shooterConfig = new SparkMaxConfig();
   /** Creates a new ExampleSubsystem. */
-  public Shooter() {}
+  public shooter() {
+    intakeConfig.inverted(true);
+    m_intakeMotor.configure(intakeConfig, com.revrobotics.ResetMode.kNoResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
+    
+    shooterConfig.inverted(true);
+    m_shooterMotor.configure(shooterConfig, com.revrobotics.ResetMode.kNoResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
+  }
 
   public void ShooterFirer(){
-        m_intakeUpperMotor.set(1.0); //motor intakeUpper spin
-        m_intakeLowerMotor.set(1.0); //motor intakeLower spin
+        m_intakeMotor.set(-1);
+        m_shooterMotor.set(1); //motor shooter spin
     }
+
+  public void FireShooterOnly() {
+    m_shooterMotor.set(1);
+  }
 
   public void ShooterReverse(){
-        m_intakeUpperMotor.set(-1.0); //motor intakeUpper spin reversed
-        m_intakeLowerMotor.set(-1.0); //motor intakeLower spin reversed
+        m_intakeMotor.set(0.5);
+        m_shooterMotor.set(-0.5); //motor shooter spin reversed
+    }
+  
+   public void intakein(){
+      m_intakeMotor.set(0.6); //motor intake spin
+      m_shooterMotor.set(0.6);
+  }
+  
+  public void intakeout(){
+        m_intakeMotor.set(-0.6); //motor intake spin reversed
+        m_shooterMotor.set(-0.6);
     }
 
-    public void ShooterStop(){
-        m_intakeUpperMotor.set(0); //motor intakeUpper spin stopper
-        m_intakeLowerMotor.set(0); //motor intakeLower spin stopper
-    }
+  public void intakeAndShooterStop() {
+    m_intakeMotor.set(0);
+    m_shooterMotor.set(0);
+  }
 
   @Override
   public void periodic() {

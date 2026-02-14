@@ -10,12 +10,17 @@ import frc.robot.commands.intakeOut;
 import frc.robot.commands.intakein;
 import frc.robot.commands.ShooterFirer;
 import frc.robot.commands.ShooterReverse;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.drive;
+import frc.robot.subsystems.climber;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.CenterAuto;
+import frc.robot.commands.LeftAuto;
+import frc.robot.commands.RightAuto;
 
 
 /**
@@ -26,15 +31,20 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public static final Intake m_intake = new Intake();
-  public static final Shooter m_shooter = new Shooter();
+  public static final shooter m_shooter = new shooter();
   public static final drive m_drive = new drive();
+  public static final climber m_climber = new climber();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final CommandXboxController controller = new CommandXboxController(1); //binds controller
   final CommandXboxController driverController = new CommandXboxController(0); //driving controller
 
+  public LeftAuto leftAuto =  new LeftAuto();
+  public CenterAuto centerAuto =  new CenterAuto();
+  public RightAuto rightAuto =  new RightAuto();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
     // Configure the trigger bindings
     configureBindings();
   }
@@ -49,11 +59,10 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    controller.a().whileTrue(new intakeOut());                        //            A   =   intake Out
-    controller.b().whileTrue(new intakein());                         //            B   =   intake In
-    controller.x().whileTrue(new ShooterFirer());                     //            X   =   Enable Compressor
-    controller.y().whileTrue(new ShooterReverse());                   //            Y   =   Rotate Wrist
-
+    controller.a().whileTrue(new intakein());                        //            A   =   intake in
+    controller.b().whileTrue(new intakeOut());                         //            B   =   intake out
+    controller.x().whileTrue(new ShooterFirer());                     //            X   =   shooter shoot
+    controller.y().whileTrue(new ShooterReverse());                   //            Y   =   shooter reverse
 
 
 
@@ -73,6 +82,6 @@ public class RobotContainer {
    */
   //public Command getAutonomousCommand() {
   //  // An example command will be run in autonomous
-  //  return Autos.exampleAuto(m_exampleSubsystem);
+  //  return m_chooser.getSelected();
   //}
 }

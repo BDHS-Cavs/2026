@@ -4,17 +4,40 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Intake;
+import static edu.wpi.first.units.Units.Seconds;
+
+import edu.wpi.first.units.measure.Time;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.drive;
+import frc.robot.subsystems.shooter;
 
-public final class Autos {
-  /** Example static factory for an autonomous command. */
-  //public static Command exampleAuto(Intake subsystem) {
-  //  return;
-  //}
+import frc.robot.RobotContainer;
 
-  private Autos() {
-    throw new UnsupportedOperationException("This is a utility class!");
-  }
+public class Autos extends Command{
+
+  double startTime = 0;
+  boolean timerSet = false;
+
+    public Autos(){
+        addRequirements(RobotContainer.m_shooter);
+    }
+
+    public void initialize() {}
+
+    public void execute() {
+        //RobotContainer.m_shooter.intakein();
+        SmartDashboard.putNumber("StartTime", startTime);
+        if(timerSet != true) {
+          startTime = System.currentTimeMillis();
+          timerSet = true;
+        }
+    }
+
+    public void end(boolean interrupted) {
+        //RobotContainer.m_shooter.intakeAndShooterStop();
+    }
+
 }

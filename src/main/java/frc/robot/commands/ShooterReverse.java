@@ -13,7 +13,7 @@ public class ShooterReverse extends Command{
     }
 
     public void end(boolean interrupted) {
-        RobotContainer.m_shooter.ShooterStop();
+        RobotContainer.m_shooter.intakeAndShooterStop();
     }
 
 }

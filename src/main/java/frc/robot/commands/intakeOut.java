@@ -5,15 +5,15 @@ import frc.robot.RobotContainer;
 
 public class intakeOut extends Command{
     public intakeOut(){
-        addRequirements(RobotContainer.m_intake);
+        addRequirements(RobotContainer.m_shooter);
     }
 
     public void execute() {
-        RobotContainer.m_intake.intakeout();
+        RobotContainer.m_shooter.intakeout();
     }
 
     public void end(boolean interrupted) {
-        RobotContainer.m_intake.intakestop();
+        RobotContainer.m_shooter.intakeAndShooterStop();
     }
 
 }
