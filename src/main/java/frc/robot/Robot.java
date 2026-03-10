@@ -18,6 +18,9 @@ import edu.wpi.first.cscore.UsbCamera;
  * this project, you must also update the Main.java file in the project.
  */
 public class Robot extends TimedRobot {
+  
+  // UsbCamera camera0;
+  // UsbCamera camera1;
 
   private Command m_autonomousCommand;
   
@@ -32,6 +35,10 @@ public class Robot extends TimedRobot {
   public Robot() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+
+    //camera0 = CameraServer.startAutomaticCapture(0);
+    //camera1 = CameraServer.startAutomaticCapture(1);
+
     UsbCamera camera0;
     CameraServer.startAutomaticCapture(0);
     UsbCamera camera1;

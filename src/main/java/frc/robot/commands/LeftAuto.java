@@ -69,6 +69,7 @@ public class LeftAuto extends Command{
 
     public void end(boolean interrupted) {
         RobotContainer.m_shooter.intakeAndShooterStop();
+        RobotContainer.m_drive.move(0, 0);
     }
 
 }
