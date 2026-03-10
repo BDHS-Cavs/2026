@@ -14,7 +14,6 @@ public class LeftAuto extends Command{
 
     public LeftAuto(){
         addRequirements(RobotContainer.m_shooter);
-        addRequirements(RobotContainer.m_climber);
         addRequirements(RobotContainer.m_drive);
     }
 

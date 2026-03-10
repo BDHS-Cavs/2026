@@ -27,8 +27,8 @@ public class shooter extends SubsystemBase {
   }
 
   public void ShooterFirer(){
-        m_intakeMotor.set(-1);
-        m_shooterMotor.set(1); //motor shooter spin
+        m_intakeMotor.set(1);
+        m_shooterMotor.set(-1); //motor shooter spin
     }
 
   public void FireShooterOnly() {
@@ -36,13 +36,13 @@ public class shooter extends SubsystemBase {
   }
 
   public void ShooterReverse(){
-        m_intakeMotor.set(1);
+        m_intakeMotor.set(-1);
         m_shooterMotor.set(1); //motor shooter spin reversed
     }
   
    public void intakein(){
-      m_intakeMotor.set(1); //motor intake spin
-      m_shooterMotor.set(1);
+      m_intakeMotor.set(-1); //motor intake spin
+      m_shooterMotor.set(-1);
   }
   
   public void intakeout(){

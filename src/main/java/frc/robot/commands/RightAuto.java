@@ -14,7 +14,6 @@ public class RightAuto extends Command{
 
     public RightAuto(){
         addRequirements(RobotContainer.m_shooter);
-        addRequirements(RobotContainer.m_climber);
         addRequirements(RobotContainer.m_drive);
     }
 

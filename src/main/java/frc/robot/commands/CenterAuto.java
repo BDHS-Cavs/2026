@@ -14,7 +14,6 @@ public class CenterAuto extends Command{
 
     public CenterAuto(){
         addRequirements(RobotContainer.m_shooter);
-        addRequirements(RobotContainer.m_climber);
         addRequirements(RobotContainer.m_drive);
     }
 

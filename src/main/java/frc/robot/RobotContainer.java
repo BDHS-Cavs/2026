@@ -12,15 +12,13 @@ import frc.robot.commands.ShooterFirer;
 import frc.robot.commands.ShooterReverse;
 import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.drive;
-import frc.robot.subsystems.climber;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.CenterAuto;
-import frc.robot.commands.ClimberDown;
-import frc.robot.commands.ClimberUp;
 import frc.robot.commands.LeftAuto;
 import frc.robot.commands.RightAuto;
 
@@ -35,10 +33,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static final shooter m_shooter = new shooter();
   public static final drive m_drive = new drive();
-  public static final climber m_climber = new climber();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final CommandXboxController controller = new CommandXboxController(1); //binds controller
-  final CommandXboxController driverController = new CommandXboxController(0); //driving controller
+  final CommandPS5Controller driverController = new CommandPS5Controller(0); //driving controller
 
   public LeftAuto leftAuto =  new LeftAuto();
   public CenterAuto centerAuto =  new CenterAuto();
@@ -65,8 +62,6 @@ public class RobotContainer {
     controller.b().whileTrue(new intakeOut());                         //            B   =   intake out
     controller.x().whileTrue(new ShooterFirer());                     //            X   =   shooter shoot
     controller.y().whileTrue(new ShooterReverse());                   //            Y   =   shooter reverse
-    controller.leftTrigger().whileTrue(new ClimberDown());
-    controller.rightTrigger().whileTrue(new ClimberUp());
 
 
 
