@@ -14,8 +14,8 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 public class climber extends SubsystemBase {
 
-    SparkMax m_climberMotor1 = new SparkMax(9, MotorType.kBrushless); //upper shooter motor
-    SparkMax m_climberMotor2 = new SparkMax(10, MotorType.kBrushless); // intake motor
+    SparkMax m_climberMotor1 = new SparkMax(14, MotorType.kBrushless); //upper shooter motor
+    SparkMax m_climberMotor2 = new SparkMax(15, MotorType.kBrushless); // intake motor
 
     RelativeEncoder m_climberRelativeEncoder = m_climberMotor1.getEncoder();//elevator motor encoder
 

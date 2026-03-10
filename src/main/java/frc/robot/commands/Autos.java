@@ -37,7 +37,9 @@ public class Autos extends Command{
     }
 
     public void end(boolean interrupted) {
-        //RobotContainer.m_shooter.intakeAndShooterStop();
+        RobotContainer.m_shooter.intakeAndShooterStop();
+        
+
     }
 
 }

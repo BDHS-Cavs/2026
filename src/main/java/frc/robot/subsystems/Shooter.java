@@ -19,10 +19,10 @@ public class shooter extends SubsystemBase {
     SparkMaxConfig shooterConfig = new SparkMaxConfig();
   /** Creates a new ExampleSubsystem. */
   public shooter() {
-    intakeConfig.inverted(true);
+    intakeConfig.inverted(false);
     m_intakeMotor.configure(intakeConfig, com.revrobotics.ResetMode.kNoResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
     
-    shooterConfig.inverted(true);
+    shooterConfig.inverted(false);
     m_shooterMotor.configure(shooterConfig, com.revrobotics.ResetMode.kNoResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
   }
 
@@ -32,22 +32,22 @@ public class shooter extends SubsystemBase {
     }
 
   public void FireShooterOnly() {
-    m_shooterMotor.set(1);
+    m_shooterMotor.set(-1);
   }
 
   public void ShooterReverse(){
-        m_intakeMotor.set(0.5);
-        m_shooterMotor.set(-0.5); //motor shooter spin reversed
+        m_intakeMotor.set(1);
+        m_shooterMotor.set(1); //motor shooter spin reversed
     }
   
    public void intakein(){
-      m_intakeMotor.set(0.6); //motor intake spin
-      m_shooterMotor.set(0.6);
+      m_intakeMotor.set(1); //motor intake spin
+      m_shooterMotor.set(1);
   }
   
   public void intakeout(){
-        m_intakeMotor.set(-0.6); //motor intake spin reversed
-        m_shooterMotor.set(-0.6);
+        m_intakeMotor.set(1); //motor intake spin reversed
+        m_shooterMotor.set(1);
     }
 
   public void intakeAndShooterStop() {

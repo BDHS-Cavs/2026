@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -16,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * this project, you must also update the Main.java file in the project.
  */
 public class Robot extends TimedRobot {
+
   private Command m_autonomousCommand;
   
   public static SendableChooser<Command> m_chooser;
@@ -29,6 +32,11 @@ public class Robot extends TimedRobot {
   public Robot() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    UsbCamera camera0;
+    CameraServer.startAutomaticCapture(0);
+    UsbCamera camera1;
+    CameraServer.startAutomaticCapture(1);
+
     m_robotContainer = new RobotContainer();
 
   }

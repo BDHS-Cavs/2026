@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.CenterAuto;
+import frc.robot.commands.ClimberDown;
+import frc.robot.commands.ClimberUp;
 import frc.robot.commands.LeftAuto;
 import frc.robot.commands.RightAuto;
 
@@ -63,7 +65,8 @@ public class RobotContainer {
     controller.b().whileTrue(new intakeOut());                         //            B   =   intake out
     controller.x().whileTrue(new ShooterFirer());                     //            X   =   shooter shoot
     controller.y().whileTrue(new ShooterReverse());                   //            Y   =   shooter reverse
-
+    controller.leftTrigger().whileTrue(new ClimberDown());
+    controller.rightTrigger().whileTrue(new ClimberUp());
 
 
 
