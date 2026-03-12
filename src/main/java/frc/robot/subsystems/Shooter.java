@@ -42,12 +42,12 @@ public class shooter extends SubsystemBase {
   
    public void intakein(){
       m_intakeMotor.set(-1); //motor intake spin
-      m_shooterMotor.set(-1);
+      m_shooterMotor.set(-0.6);
   }
   
   public void intakeout(){
         m_intakeMotor.set(1); //motor intake spin reversed
-        m_shooterMotor.set(1);
+        m_shooterMotor.set(0.6);
     }
 
   public void intakeAndShooterStop() {

@@ -24,6 +24,8 @@ public class drive extends SubsystemBase {
     SparkMax m_leftFrontMotor = new SparkMax(6, MotorType.kBrushed); //upper intake motor
     SparkMax m_rightFrontMotor = new SparkMax(2, MotorType.kBrushed); //lower intake motor
 
+    double xspeed;
+
     AHRS m_gyro = new AHRS(NavXComType.kMXP_SPI);
     
     SparkMaxConfig leftFrontConfig = new SparkMaxConfig();
@@ -33,13 +35,16 @@ public class drive extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public drive() {
     leftFrontConfig.follow(m_leftBackMotor);
+    leftFrontConfig.inverted(false);
     m_leftFrontMotor.configure(leftFrontConfig, com.revrobotics.ResetMode.kNoResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
 
     rightFrontConfig.follow(m_rightBackMotor);
+    rightFrontConfig.inverted(false);
     m_rightFrontMotor.configure(rightFrontConfig, com.revrobotics.ResetMode.kNoResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
   }
 public void move(double x, double y) {
-  drivetrain.arcadeDrive(x, y);
+  xspeed = x*0.75; // limit turning speed
+  drivetrain.arcadeDrive(-xspeed, -y);
 }
 
 public void driveStop() {

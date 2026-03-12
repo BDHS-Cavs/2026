@@ -24,10 +24,10 @@ public class ShooterFirer extends Command{
 
     public void execute() {
         timer = System.currentTimeMillis() - startTime;
-        if(timer < 500) {
+        if(timer < 1000) {
             RobotContainer.m_shooter.FireShooterOnly();
         }
-        if(timer > 500) {
+        if(timer > 1000) {
             RobotContainer.m_shooter.ShooterFirer();
         }
     }

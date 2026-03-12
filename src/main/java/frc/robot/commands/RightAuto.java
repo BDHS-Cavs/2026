@@ -5,6 +5,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class RightAuto extends Command{
@@ -31,40 +32,47 @@ public class RightAuto extends Command{
           startTime = System.currentTimeMillis();
           timerSet = true;
         }
-        
-        //Move forwards for 0.5 seconds
-        if(timer > 0 && timer < 500) { //if under 0.5 sec
-            RobotContainer.m_drive.move(0, 0.5); // move forwards to get away from the thing
-        }
+        if(timerSet == true) { // dont run anything until timer was set
+            //Move forwards for 0.5 seconds
+            if(timer > 500 && timer < 1500) { //if under 0.5 sec
+                RobotContainer.m_shooter.FireShooterOnly(); // shoot
+            }
 
-        //Shoot for 4.5 seconds
-        if(timer > 500 && timer < 5000) {// if over 0.5 sec and under 5 sec
-            RobotContainer.m_shooter.ShooterFirer(); // shoot
-        }
+            //Shoot for 4.5 seconds
+            if(timer > 1500 && timer < 19000) {// if over 0.5 sec and under 5 sec
+                RobotContainer.m_shooter.ShooterFirer();
+            }
         
-        //Stop shooting and move forwards for 2 seconds
-        if(timer > 5000 && timer < 7000) { // if over 5 sec and under 7 sec
-            RobotContainer.m_shooter.intakeAndShooterStop(); // stop shooting
-            RobotContainer.m_drive.move(0, 1); // move forwards
-        }
+            //Stop shooting and move forwards for 2 seconds
+            if(timer > 19000 && timer < 19500) { // if over 5 sec and under 7 sec
+                RobotContainer.m_shooter.intakeAndShooterStop();
+                //RobotContainer.m_drive.move(0, 1); // move forwards
+            }
 
-        //Stop moving for 0.05 seconds
-        if(timer > 7000 && timer < 7050) { // if over 7 sec and under 7.05 sec
-            RobotContainer.m_drive.move(0, 0); // stop moving
-        }
+            //if(timer > 9500 && timer < 10000) {
+            //    RobotContainer.m_shooter.intakeAndShooterStop(); // stop shooting
+            //}
+
+            /*
+            //Stop moving for 0.05 seconds
+            if(timer > 7000 && timer < 7050) { // if over 7 sec and under 7.05 sec
+                RobotContainer.m_drive.move(0, 0); // stop moving
+            }
         
-        //SPIN 180 DEGREES FOR MAX 2 SECONDS
-        //if(timer > 7000 && timer < 9000) { // if over 7 sec and under 9 sec
-        //    if(RobotContainer.m_drive.getGyro() < 180)
-        //    {
-        //        RobotContainer.m_drive.move(1, 0);
-        //    }
-        //}
+            //SPIN 180 DEGREES FOR MAX 2 SECONDS
+            //if(timer > 7000 && timer < 9000) { // if over 7 sec and under 9 sec
+            //    if(RobotContainer.m_drive.getGyro() < 180)
+            //    {
+            //        RobotContainer.m_drive.move(1, 0);
+            //    }
+            //}
 
-        //STOP SPINNING FOR 1 SECOND
-        //if(timer > 9000 && timer < 10000) {
-        //    RobotContainer.m_drive.move(0, 0);
-        //}
+            //STOP SPINNING FOR 1 SECOND
+            //if(timer > 9000 && timer < 10000) {
+            //    RobotContainer.m_drive.move(0, 0);
+            //}
+            */
+        }
     }
 
     public void end(boolean interrupted) {
