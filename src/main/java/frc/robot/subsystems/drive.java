@@ -4,60 +4,63 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
+import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants;
 
 public class drive extends SubsystemBase {
 
-    SparkMax m_leftBackMotor = new SparkMax(5, MotorType.kBrushed); //upper intake motor
-    SparkMax m_rightBackMotor = new SparkMax(1, MotorType.kBrushed); //lower intake motor
-    SparkMax m_leftFrontMotor = new SparkMax(6, MotorType.kBrushed); //upper intake motor
-    SparkMax m_rightFrontMotor = new SparkMax(2, MotorType.kBrushed); //lower intake motor
+  SparkMax m_backLeftMotor = new SparkMax(DriveConstants.backLeftMotorID, Constants.motorType); // Back Left (5)
+  SparkMax m_backRightMotor = new SparkMax(DriveConstants.backRightMotorID, Constants.motorType); // Back Right (1)
+  SparkMax m_frontLeftMotor = new SparkMax(DriveConstants.frontLeftMotorID, Constants.motorType); // Front Left (6)
+  SparkMax m_frontRightMotor = new SparkMax(DriveConstants.frontRightMotorID, Constants.motorType); // Front Right (2)
 
-    double xspeed;
+  AHRS m_gyro = new AHRS(NavXComType.kMXP_SPI); // NavX2 MXP Gyro (MXP SPI port)
+  
+  // Configs for setting follow and inverted
+  SparkMaxConfig backLeftConfig = new SparkMaxConfig();
+  SparkMaxConfig backRightConfig = new SparkMaxConfig();
+  SparkMaxConfig frontLeftConfig = new SparkMaxConfig();
+  SparkMaxConfig frontRightConfig = new SparkMaxConfig();
 
-    AHRS m_gyro = new AHRS(NavXComType.kMXP_SPI);
-    
-    SparkMaxConfig leftFrontConfig = new SparkMaxConfig();
-    SparkMaxConfig rightFrontConfig = new SparkMaxConfig();
+  DifferentialDrive drivetrain = new DifferentialDrive(m_backLeftMotor, m_backRightMotor);
 
-    DifferentialDrive drivetrain = new DifferentialDrive(m_leftBackMotor, m_rightBackMotor);
-  /** Creates a new ExampleSubsystem. */
   public drive() {
-    leftFrontConfig.follow(m_leftBackMotor);
-    leftFrontConfig.inverted(false);
-    m_leftFrontMotor.configure(leftFrontConfig, com.revrobotics.ResetMode.kNoResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
 
-    rightFrontConfig.follow(m_rightBackMotor);
-    rightFrontConfig.inverted(false);
-    m_rightFrontMotor.configure(rightFrontConfig, com.revrobotics.ResetMode.kNoResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
+    backLeftConfig.inverted(true);
+    m_backLeftMotor.configure(backLeftConfig, Constants.resetMode, Constants.persistMode);
+
+    backRightConfig.inverted(true);
+    m_backRightMotor.configure(backRightConfig, Constants.resetMode, Constants.persistMode);
+
+    frontLeftConfig.follow(m_backLeftMotor, false);
+    m_frontLeftMotor.configure(frontLeftConfig, Constants.resetMode, Constants.persistMode);
+
+    frontRightConfig.follow(m_backRightMotor, false);
+    m_frontRightMotor.configure(frontRightConfig, Constants.resetMode, Constants.persistMode);
   }
-public void move(double x, double y) {
-  xspeed = x*0.75; // limit turning speed
-  drivetrain.arcadeDrive(-xspeed, -y);
-}
 
-public void driveStop() {
-  drivetrain.arcadeDrive(0, 0);
-}
+  public void move(double x, double y) {
+    double xspeed = x*0.75; // Limit turning speed to 75%
+    drivetrain.arcadeDrive(xspeed, y); // Drive
+  }
 
-public void gyroZero() {
-  m_gyro.reset();
-}
+  public void driveStop() {
+    drivetrain.arcadeDrive(0, 0); // Stop Drive
+  }
 
-public double getGyro() {
-  return m_gyro.getAngle();
-}
+  public void gyroZero() {
+    m_gyro.reset(); // Zero Gyro
+  }
+
+  public double getGyro() {
+    return m_gyro.getAngle(); // Get Gyro Angle
+  }
 
   @Override
   public void periodic() {

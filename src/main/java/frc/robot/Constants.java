@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import com.revrobotics.PersistMode;
+import com.revrobotics.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -12,8 +16,34 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
+
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+
+  public static final MotorType motorType = MotorType.kBrushed; // Brushed motors (for both drive and shooter/intake)
+
+  public static final ResetMode resetMode = com.revrobotics.ResetMode.kNoResetSafeParameters; // No Reset
+
+  public static final PersistMode persistMode = com.revrobotics.PersistMode.kPersistParameters; // Persist
+
+
+
+  public static class ShooterConstants {
+
+    public static final int shooterMotorID = 4; // Shooter Motor (4)
+
+    public static final int intakeMotorID = 3; // Intake Motor (3)
+
+  }
+
+  public static class DriveConstants {
+
+    public static final int backLeftMotorID = 5; // Back Left Drive Motor (5)
+
+    public static final int backRightMotorID = 1; // Back Right Drive Motor (1)
+
+    public static final int frontLeftMotorID = 6; // Front Left Drive Motor (6)
+
+    public static final int frontRightMotorID = 2; // Front Right Drive Motor (2)
+
   }
 }

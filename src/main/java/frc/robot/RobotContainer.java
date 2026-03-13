@@ -4,17 +4,12 @@
 
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.intakeOut;
 import frc.robot.commands.intakein;
-import frc.robot.commands.ShooterFirer;
-import frc.robot.commands.ShooterReverse;
+import frc.robot.commands.shooterFire;
+import frc.robot.commands.shooterReverse;
 import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.drive;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -35,6 +30,7 @@ public class RobotContainer {
   public static final drive m_drive = new drive();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final CommandXboxController controller = new CommandXboxController(1); //binds controller
+  //final CommandXboxController driverController = new CommandXboxController(0); //driving controller
   final CommandPS5Controller driverController = new CommandPS5Controller(0); //driving controller
 
   public LeftAuto leftAuto =  new LeftAuto();
@@ -59,9 +55,9 @@ public class RobotContainer {
    */
   private void configureBindings() {
     controller.a().whileTrue(new intakein());                        //            A   =   intake in
-    controller.b().whileTrue(new intakeOut());                         //            B   =   intake out
-    controller.x().whileTrue(new ShooterFirer());                     //            X   =   shooter shoot
-    controller.y().whileTrue(new ShooterReverse());                   //            Y   =   shooter reverse
+    controller.b().whileTrue(new intakeOut());                       //            B   =   intake out
+    controller.x().whileTrue(new shooterFire());                     //            X   =   shooter shoot
+    controller.y().whileTrue(new shooterReverse());                  //            Y   =   shooter reverse
 
 
 

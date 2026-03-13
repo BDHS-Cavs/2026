@@ -9,11 +9,11 @@ public class intakein extends Command{
     }
 
     public void execute() {
-        RobotContainer.m_shooter.intakein();
+        RobotContainer.m_shooter.intakeIn(); // Intake In
     }
 
     public void end(boolean interrupted) {
-        RobotContainer.m_shooter.intakeAndShooterStop();
+        RobotContainer.m_shooter.intakeAndShooterStop(); // Stop Intaking
     }
 
 }

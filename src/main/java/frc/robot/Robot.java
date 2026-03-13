@@ -19,8 +19,8 @@ import edu.wpi.first.cscore.UsbCamera;
  */
 public class Robot extends TimedRobot {
   
-  // UsbCamera camera0;
-  // UsbCamera camera1;
+  UsbCamera camera0;
+  UsbCamera camera1;
 
   private Command m_autonomousCommand;
   
@@ -36,13 +36,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
 
-    //camera0 = CameraServer.startAutomaticCapture(0);
-    //camera1 = CameraServer.startAutomaticCapture(1);
-
-    UsbCamera camera0;
-    CameraServer.startAutomaticCapture(0);
-    UsbCamera camera1;
-    CameraServer.startAutomaticCapture(1);
+    camera0 = CameraServer.startAutomaticCapture(0);
+    camera1 = CameraServer.startAutomaticCapture(1);
 
     m_robotContainer = new RobotContainer();
 
@@ -62,7 +57,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("Gyro Angle", m_robotContainer.m_drive.getGyro());
+    //SmartDashboard.putNumber("Gyro Angle", m_robotContainer.m_drive.getGyro());
   }
 
   @Override
@@ -89,7 +84,8 @@ public class Robot extends TimedRobot {
 
     m_autonomousCommand = m_chooser.getSelected();
     if(m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+      //m_autonomousCommand.schedule();
+      CommandScheduler.getInstance().schedule(m_autonomousCommand);
     }
 
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -118,7 +114,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_robotContainer.m_drive.move(m_robotContainer.driverController.getLeftX(), m_robotContainer.driverController.getLeftY());
+    m_robotContainer.m_drive.move(m_robotContainer.driverController.getLeftX(), m_robotContainer.driverController.getLeftY()); // todo The static field RobotContainer.m_drive should be accessed in a static way
   }
 
   @Override
