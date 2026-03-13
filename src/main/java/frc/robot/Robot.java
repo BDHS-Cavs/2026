@@ -58,6 +58,13 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     //SmartDashboard.putNumber("Gyro Angle", m_robotContainer.m_drive.getGyro());
+
+    String period = m_robotContainer.getMatchPeriod();
+    boolean canScore = m_robotContainer.canScore();
+
+    SmartDashboard.putString("Match Period", period);
+    SmartDashboard.putBoolean("Hub Active", canScore);
+
   }
 
   @Override
@@ -114,7 +121,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_robotContainer.m_drive.move(m_robotContainer.driverController.getLeftX(), m_robotContainer.driverController.getLeftY()); // todo The static field RobotContainer.m_drive should be accessed in a static way
+    m_robotContainer.m_drive.move(m_robotContainer.driverController.getLeftX(), m_robotContainer.driverController.getLeftY()); // TODO The static field RobotContainer.m_drive should be accessed in a static way
   }
 
   @Override
