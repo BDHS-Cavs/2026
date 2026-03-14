@@ -158,16 +158,15 @@ Match timings:
       wonAuto = alliance == autoWinner;
     }
 
-    if(shift.equals("SHIFT_1")) {
-      return "ACTIVE"; // both active
-    }
+    if(shift.startsWith("SHIFT_")) {
+      int shiftNum = Integer.parseInt(shift.substring(6));
 
-    if(shift.equals("SHIFT_2")) {
-      return wonAuto ? "INACTIVE" : "ACTIVE"; // auto loser active
-    }
-
-    if(shift.equals("SHIFT_3") || shift.equals("SHIFT_4") || shift.equals("SHIFT_5")) {
-      return wonAuto ? "ACTIVE" : "INACTIVE"; // trade
+      if(shiftNum % 2 == 1) {
+        return wonAuto ? "INACTIVE" : "ACTIVE";
+      }
+      else {
+        return wonAuto ? "ACTIVE" : "INACTIVE";
+      }
     }
 
     return "UNKNOWN";
