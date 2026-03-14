@@ -73,14 +73,14 @@ public class RobotContainer {
 /*
 
 Match timings:
-2:45 - 2:25 Auto (both active)
-2:25 - 2:20 Wait 5 seconds
-2:20 - 2:10 Both active
-2:10 - 1:45 Auto loser active
-1:45 - 1:20 Trade active
-1:20 - 0:55 Trade active
-0:55 - 0:30 Trade active
-0:30 - 0:00 Both active
+2:45 - 2:25 Auto (both active) "AUTO"
+2:25 - 2:20 Wait 5 seconds "TRANSITION"
+2:20 - 2:10 Both active "SHIFT_1"
+2:10 - 1:45 Auto loser active "SHIFT_2"
+1:45 - 1:20 Trade active "SHIFT_3"
+1:20 - 0:55 Trade active "SHIFT_4"
+0:55 - 0:30 Trade active "SHIFT_5"
+0:30 - 0:00 Both active "ENDGAME"
 
 */
 
@@ -88,36 +88,23 @@ Match timings:
   private Boolean practiceWonAuto = null;
 
   public String getAllianceShift() {
-    if(DriverStation.isAutonomousEnabled()) {
-      return "AUTO";
-    }
 
-    if(DriverStation.isDisabled()) {
+    if (DriverStation.isDisabled()) {
       practiceWonAuto = null;
       return "DISABLED";
     }
 
     double time = DriverStation.getMatchTime();
 
-    if(DriverStation.isFMSAttached()) {
-      if (time > 130) return "TRANSITION";
-      if (time > 105) return "SHIFT_1";
-      if (time > 80) return "SHIFT_2";
-      if (time > 55) return "SHIFT_3";
-      if (time > 30) return "SHIFT_4";
+    if (time > 145) return "AUTO";
+    if (time > 140) return "TRANSITION";
+    if (time > 130) return "SHIFT_1";
+    if (time > 105) return "SHIFT_2";
+    if (time > 80) return "SHIFT_3";
+    if (time > 55) return "SHIFT_4";
+    if (time > 30) return "SHIFT_5";
 
-      return "ENDGAME";
-    }
-
-    else {
-      if (time > 110) return "ENDGAME";
-      if (time > 85) return "SHIFT_4";
-      if (time > 60) return "SHIFT_3";
-      if (time > 35) return "SHIFT_2";
-      if (time > 10) return "SHIFT_1";
-
-      return "TRANSITION";
-    }
+    return "ENDGAME";
   }
 
   public String getHubStatus(String shift) {
@@ -161,12 +148,16 @@ Match timings:
       wonAuto = alliance == autoWinner;
     }
 
-    if(shift.equals("SHIFT_1") || shift.equals("SHIFT_3")) {
-      return wonAuto ? "INACTIVE" : "ACTIVE";
+    if(shift.equals("SHIFT_1")) {
+      return "ACTIVE"; // both active
     }
-    
-    if(shift.equals("SHIFT_2") || shift.equals("SHIFT_4")) {
-      return wonAuto ? "ACTIVE" : "INACTIVE";
+
+    if(shift.equals("SHIFT_2")) {
+      return wonAuto ? "INACTIVE" : "ACTIVE"; // auto loser active
+    }
+
+    if(shift.equals("SHIFT_3") || shift.equals("SHIFT_4") || shift.equals("SHIFT_5")) {
+      return wonAuto ? "ACTIVE" : "INACTIVE"; // trade
     }
 
     return "UNKNOWN";
@@ -176,23 +167,14 @@ Match timings:
     double time = DriverStation.getMatchTime();
     double result;
 
-    if(DriverStation.isFMSAttached()) {
-      if (time > 130) result = time - 130;
-      else if (time > 105) result = time - 105;
-      else if (time > 80) result = time - 80;
-      else if (time > 55) result = time - 55;
-      else if (time > 30) result = time - 30;
-      else result = time;
-    }
-
-    else {
-      if (time > 110) result = time - 110;
-      else if (time > 85) result = time - 85;
-      else if (time > 60) result = time - 60;
-      else if (time > 35) result = time - 35;
-      else if (time > 10) result = time - 10;
-      else result = time;
-    }
+    if (time > 145) result = time - 145;
+    else if (time > 140) result = time - 140;
+    else if (time > 130) result = time - 130;
+    else if (time > 105) result = time - 105;
+    else if (time > 80) result = time - 80;
+    else if (time > 55) result = time - 55;
+    else if (time > 30) result = time - 30;
+    else result = time;
 
     return Math.max(0, result);
   }
