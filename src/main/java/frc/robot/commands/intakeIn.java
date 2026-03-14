@@ -3,8 +3,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 
-public class intakein extends Command{
-    public intakein(){
+public class intakeIn extends Command{
+    public intakeIn(){
         addRequirements(RobotContainer.m_shooter);
     }
 

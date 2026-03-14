@@ -122,7 +122,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_robotContainer.m_drive.move(m_robotContainer.driverController.getLeftX(), m_robotContainer.driverController.getLeftY()); // TODO The static field RobotContainer.m_drive should be accessed in a static way
+    //m_robotContainer.m_drive.move(m_robotContainer.driverController.getLeftX(), m_robotContainer.driverController.getLeftY()); // The static field RobotContainer.m_drive should be accessed in a static way // moved to commands/move.java and a default command in robotcontainer constructor bc it was spewing about not being updated enough
   }
 
   @Override
