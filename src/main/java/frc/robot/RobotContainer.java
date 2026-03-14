@@ -52,7 +52,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    m_drive.setDefaultCommand(new move()); // drive with controller input
+    //not working m_drive.setDefaultCommand(new move()); // drive with controller input
   }
 
   /**
