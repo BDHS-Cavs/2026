@@ -6,7 +6,7 @@
 /*
 
 
-THIS FILE IS NOT USED!!!!!!!!!!!!!!!! LeftAuto.java, CenterAuto.java, and RightAuto.java are the autonomous files!
+THIS FILE IS NOT USED!!!!!!!!!!!!!!!! LeftAuto.java, CenterAuto.java, RightAuto.java, and NoAuto.java are the autonomous files!
 
 
 */

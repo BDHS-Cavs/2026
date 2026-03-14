@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.CenterAuto;
 import frc.robot.commands.LeftAuto;
 import frc.robot.commands.RightAuto;
+import frc.robot.commands.NoAuto;
 
 
 /**
@@ -37,6 +38,7 @@ public class RobotContainer {
   public LeftAuto leftAuto =  new LeftAuto();
   public CenterAuto centerAuto =  new CenterAuto();
   public RightAuto rightAuto =  new RightAuto();
+  public NoAuto noAuto = new NoAuto();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

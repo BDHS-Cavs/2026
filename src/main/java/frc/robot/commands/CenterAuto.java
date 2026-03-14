@@ -27,7 +27,7 @@ public class CenterAuto extends Command{
         
         // 0.5s to 1.5s
         if(timer > 500 && timer < 1500) {
-            RobotContainer.m_drive.move(0, 0.5); // Move forwards to get away from the wall
+            RobotContainer.m_drive.move(0, -0.5); // Move forwards to get away from the wall // TODO why negative????
         }
 
         // 1.5s to 2.5s

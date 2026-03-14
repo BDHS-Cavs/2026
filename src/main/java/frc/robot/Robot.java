@@ -74,6 +74,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Left Auto", m_robotContainer.leftAuto);
     m_chooser.addOption("Center Auto", m_robotContainer.centerAuto);
     m_chooser.addOption("Right Auto", m_robotContainer.rightAuto);
+    m_chooser.addOption("No Auto", m_robotContainer.noAuto);
 
     SmartDashboard.putData("Autonomous Chooser", m_chooser);
   }
