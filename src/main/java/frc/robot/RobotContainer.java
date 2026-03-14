@@ -5,15 +5,19 @@
 package frc.robot;
 
 import frc.robot.commands.intakeOut;
-import frc.robot.commands.intakein;
+import frc.robot.commands.intakeIn;
 import frc.robot.commands.shooterFire;
 import frc.robot.commands.shooterReverse;
+import frc.robot.commands.move;
+
 import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.drive;
+
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import frc.robot.commands.CenterAuto;
 import frc.robot.commands.LeftAuto;
 import frc.robot.commands.RightAuto;
@@ -30,19 +34,23 @@ public class RobotContainer {
   public static final shooter m_shooter = new shooter();
   public static final drive m_drive = new drive();
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  final CommandXboxController controller = new CommandXboxController(1); //binds controller
-  //final CommandXboxController driverController = new CommandXboxController(0); //driving controller
-  final CommandPS5Controller driverController = new CommandPS5Controller(0); //driving controller
+  public final CommandXboxController controller = new CommandXboxController(1); //binds controller
+  //public final CommandXboxController driverController = new CommandXboxController(0); //driving controller
+  public final CommandPS5Controller driverController = new CommandPS5Controller(0); //driving controller
 
   public LeftAuto leftAuto =  new LeftAuto();
   public CenterAuto centerAuto =  new CenterAuto();
   public RightAuto rightAuto =  new RightAuto();
+
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
     // Configure the trigger bindings
     configureBindings();
+
+    m_drive.setDefaultCommand(new move()); // drive with controller input
   }
 
   /**
@@ -55,7 +63,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    controller.a().whileTrue(new intakein());                        //            A   =   intake in
+    controller.a().whileTrue(new intakeIn());                        //            A   =   intake in
     controller.b().whileTrue(new intakeOut());                       //            B   =   intake out
     controller.x().whileTrue(new shooterFire());                     //            X   =   shooter shoot
     controller.y().whileTrue(new shooterReverse());                  //            Y   =   shooter reverse

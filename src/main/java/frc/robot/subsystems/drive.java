@@ -28,7 +28,7 @@ public class drive extends SubsystemBase {
   SparkMaxConfig frontLeftConfig = new SparkMaxConfig();
   SparkMaxConfig frontRightConfig = new SparkMaxConfig();
 
-  DifferentialDrive drivetrain = new DifferentialDrive(m_backLeftMotor, m_backRightMotor); // TODO errors spewing about motor safety
+  DifferentialDrive drivetrain = new DifferentialDrive(m_backLeftMotor, m_backRightMotor);
 
   public drive() {
 
