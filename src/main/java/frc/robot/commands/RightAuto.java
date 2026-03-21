@@ -5,15 +5,21 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.drive;
+import frc.robot.subsystems.shooter;
 
 public class RightAuto extends Command{
 
-  double startTime;
+    private final shooter m_shooter;
+    private final drive m_drive;
+    double startTime;
 
-    public RightAuto(){
-        addRequirements(RobotContainer.m_shooter);
-        addRequirements(RobotContainer.m_drive);
+    public RightAuto(shooter m_shooter, drive m_drive){
+        this.m_shooter = m_shooter;
+        this.m_drive = m_drive;
+
+        addRequirements(m_shooter);
+        addRequirements(m_drive);
     }
 
     public void initialize() {
@@ -27,23 +33,23 @@ public class RightAuto extends Command{
             
         // 0.5s to 1.5s
         if(timer > 500 && timer < 1500) {
-            RobotContainer.m_shooter.fireShooterOnly(); // Spin up shooter
+            m_shooter.fireShooterOnly(); // Spin up shooter
         }
         
         // 1.5s to 19s
         if(timer > 1500 && timer < 19000) {
-            RobotContainer.m_shooter.shooterFire(); // Shoot
+            m_shooter.shooterFire(); // Shoot
         }
     
         // 19s to 19.5s
         if(timer > 19000 && timer < 19500) {
-            RobotContainer.m_shooter.intakeAndShooterStop(); // Stop shooting
+            m_shooter.intakeAndShooterStop(); // Stop shooting
         }
     }
 
     public void end(boolean interrupted) {
-        RobotContainer.m_shooter.intakeAndShooterStop(); // Stop shooting
-        RobotContainer.m_drive.driveStop(); // Stop driving
+        m_shooter.intakeAndShooterStop(); // Stop shooting
+        m_drive.driveStop(); // Stop driving
     }
 
 }

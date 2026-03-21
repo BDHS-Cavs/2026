@@ -5,21 +5,30 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.shooter;
+import frc.robot.subsystems.drive;
 
 public class CenterAuto extends Command{
 
-  double startTime;
+    private final shooter m_shooter;
+    private final drive m_drive;
 
-    public CenterAuto(){
-        addRequirements(RobotContainer.m_shooter);
-        addRequirements(RobotContainer.m_drive);
+    double startTime;
+
+    public CenterAuto(shooter m_shooter, drive m_drive){
+        this.m_shooter = m_shooter;
+        this.m_drive = m_drive;
+
+        addRequirements(m_shooter);
+        addRequirements(m_drive);
     }
 
+    @Override
     public void initialize() {
         startTime = System.currentTimeMillis();
     }
 
+    @Override
     public void execute() {
         double timer = System.currentTimeMillis() - startTime;
         //SmartDashboard.putNumber("StartTime", startTime);
@@ -27,29 +36,35 @@ public class CenterAuto extends Command{
         
         // 0.5s to 1.5s
         if(timer > 500 && timer < 1500) {
-            RobotContainer.m_drive.move(0, -0.5); // Move forwards to get away from the wall // TODO why negative????
+            m_drive.move(0, 0.5); // Move forwards to get away from the wall
         }
 
         // 1.5s to 2.5s
         if(timer > 1500 && timer < 2500) {
-            RobotContainer.m_drive.driveStop(); // Stop driving
-            RobotContainer.m_shooter.fireShooterOnly(); // Spin up shooter
+            m_drive.driveStop(); // Stop driving
+            m_shooter.fireShooterOnly(); // Spin up shooter
         }
     
         // 2.5s to 19s
         if(timer > 2500 && timer < 19000) {
-            RobotContainer.m_shooter.shooterFire(); // Shoot
+            m_shooter.shooterFire(); // Shoot
         }
 
         // 19s to 19.5s
         if(timer > 19000 && timer < 19500) {
-            RobotContainer.m_shooter.intakeAndShooterStop(); // Stop shooting
+            m_shooter.intakeAndShooterStop(); // Stop shooting
         }
     }
 
+    @Override
     public void end(boolean interrupted) {
-        RobotContainer.m_shooter.intakeAndShooterStop(); // Stop shooting
-        RobotContainer.m_drive.driveStop(); // Stop driving
+        m_shooter.intakeAndShooterStop(); // Stop shooting
+        m_drive.driveStop(); // Stop driving
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 
 }

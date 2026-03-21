@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -58,6 +60,11 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     //SmartDashboard.putNumber("Gyro Angle", m_robotContainer.m_drive.getGyro());
+
+    SmartDashboard.putNumber("Voltage", RobotController.getBatteryVoltage());
+    SmartDashboard.putBoolean("Signal Light", RobotController.getRSLState());
+    SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
+    SmartDashboard.putData("Commands", CommandScheduler.getInstance());
 
     SmartDashboard.putString("Match Period", m_robotContainer.getMatchPeriod());
     SmartDashboard.putBoolean("Hub Active", m_robotContainer.canScore());

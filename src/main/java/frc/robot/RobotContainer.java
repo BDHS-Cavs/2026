@@ -39,10 +39,10 @@ public class RobotContainer {
   //public final CommandXboxController driverController = new CommandXboxController(0); //driving controller
   public final CommandPS5Controller driverController = new CommandPS5Controller(0); //driving controller
 
-  public LeftAuto leftAuto =  new LeftAuto();
-  public CenterAuto centerAuto =  new CenterAuto();
-  public RightAuto rightAuto =  new RightAuto();
-  public NoAuto noAuto = new NoAuto();
+  public LeftAuto leftAuto =  new LeftAuto(m_shooter, m_drive);
+  public CenterAuto centerAuto =  new CenterAuto(m_shooter, m_drive);
+  public RightAuto rightAuto =  new RightAuto(m_shooter, m_drive);
+  public NoAuto noAuto = new NoAuto(/*m_shooter, m_drive*/);
 
   private final intakeIn intakeIn = new intakeIn(m_shooter);
   private final intakeOut intakeOut = new intakeOut(m_shooter);

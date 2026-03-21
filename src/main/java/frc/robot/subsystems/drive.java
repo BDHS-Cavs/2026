@@ -32,10 +32,10 @@ public class drive extends SubsystemBase {
 
   public drive() {
 
-    backLeftConfig.inverted(true);
+    backLeftConfig.inverted(false);
     m_backLeftMotor.configure(backLeftConfig, Constants.resetMode, Constants.persistMode);
 
-    backRightConfig.inverted(true);
+    backRightConfig.inverted(false);
     m_backRightMotor.configure(backRightConfig, Constants.resetMode, Constants.persistMode);
 
     frontLeftConfig.follow(m_backLeftMotor, false);
@@ -46,7 +46,8 @@ public class drive extends SubsystemBase {
   }
 
   public void move(double x, double y) {
-    double xspeed = x*0.75; // Limit turning speed to 75%
+    double xspeed = x*-0.75; // Limit turning speed to 75% // Invert X axis
+    y *= -1; // Invert Y axis
     drivetrain.arcadeDrive(xspeed, y); // Drive
   }
 
