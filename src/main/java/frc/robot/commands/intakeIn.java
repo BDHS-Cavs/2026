@@ -1,19 +1,31 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.shooter;
 
 public class intakeIn extends Command{
-    public intakeIn(){
-        addRequirements(RobotContainer.m_shooter);
+
+    private final shooter m_shooter;
+
+    public intakeIn(shooter m_shooter){
+        this.m_shooter = m_shooter;
+
+        addRequirements(m_shooter);
     }
 
+    @Override
     public void execute() {
-        RobotContainer.m_shooter.intakeIn(); // Intake In
+        m_shooter.intakeIn(); // Intake In
     }
 
+    @Override
     public void end(boolean interrupted) {
-        RobotContainer.m_shooter.intakeAndShooterStop(); // Stop Intaking
+        m_shooter.intakeAndShooterStop(); // Stop Intaking
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 
 }

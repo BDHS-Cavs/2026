@@ -44,7 +44,10 @@ public class RobotContainer {
   public RightAuto rightAuto =  new RightAuto();
   public NoAuto noAuto = new NoAuto();
 
-
+  private final intakeIn intakeIn = new intakeIn(m_shooter);
+  private final intakeOut intakeOut = new intakeOut(m_shooter);
+  private final shooterFire shooterFire = new shooterFire(m_shooter);
+  private final shooterReverse shooterReverse = new shooterReverse(m_shooter);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -65,10 +68,10 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    controller.a().whileTrue(new intakeIn());                        //            A   =   intake in
-    controller.b().whileTrue(new intakeOut());                       //            B   =   intake out
-    controller.x().whileTrue(new shooterFire());                     //            X   =   shooter shoot
-    controller.y().whileTrue(new shooterReverse());                  //            Y   =   shooter reverse
+    controller.a().whileTrue(intakeIn);                        //            A   =   intake in
+    controller.b().whileTrue(intakeOut);                       //            B   =   intake out
+    controller.x().whileTrue(shooterFire);                     //            X   =   shooter shoot
+    controller.y().whileTrue(shooterReverse);                  //            Y   =   shooter reverse
 
 
 
