@@ -14,6 +14,7 @@ public class NoAuto extends Command{
     //private final drive m_drive;
 
     double startTime;
+    //double driveSpeed;
 
     public NoAuto(/*shooter m_shooter, drive m_drive*/){
         //this.m_shooter = m_shooter;
@@ -26,6 +27,7 @@ public class NoAuto extends Command{
     @Override
     public void initialize() {
         startTime = System.currentTimeMillis();
+        //driveSpeed = 0.0;
     }
 
     @Override
@@ -34,6 +36,8 @@ public class NoAuto extends Command{
         //SmartDashboard.putNumber("StartTime", startTime);
         SmartDashboard.putNumber("Auto Timer", timer);
             
+        //m_drive.move(0, driveSpeed); // always send drive updates, change speed in auto timer slots. this stops motor safety drive not updated often enough warnings
+
         // 0.5s to 1.5s
         //if(timer > 500 && timer < 1500) {
         //    m_shooter.fireShooterOnly(); // Spin up shooter
@@ -53,6 +57,7 @@ public class NoAuto extends Command{
     @Override
     public void end(boolean interrupted) {
         //m_shooter.intakeAndShooterStop(); // Stop shooting
+        //driveSpeed = 0.0; // Stop driving
         //m_drive.driveStop(); // Stop driving
     }
 

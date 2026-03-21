@@ -14,6 +14,7 @@ public class CenterAuto extends Command{
     private final drive m_drive;
 
     double startTime;
+    double driveSpeed;
 
     public CenterAuto(shooter m_shooter, drive m_drive){
         this.m_shooter = m_shooter;
@@ -26,6 +27,7 @@ public class CenterAuto extends Command{
     @Override
     public void initialize() {
         startTime = System.currentTimeMillis();
+        driveSpeed = 0.0;
     }
 
     @Override
@@ -34,14 +36,18 @@ public class CenterAuto extends Command{
         //SmartDashboard.putNumber("StartTime", startTime);
         SmartDashboard.putNumber("Auto Timer", timer);
         
+        m_drive.move(0, driveSpeed); // always send drive updates, change speed in auto timer slots. this stops motor safety drive not updated often enough warnings
+
         // 0.5s to 1.5s
         if(timer > 500 && timer < 1500) {
-            m_drive.move(0, 0.5); // Move forwards to get away from the wall // TODO switch to the command so it doesnt complain about motor safety not updated enough
+            driveSpeed = 0.5; // Move forwards to get away from the wall
+            //m_drive.move(0, 0.5); // Move forwards to get away from the wall
         }
 
         // 1.5s to 2.5s
         if(timer > 1500 && timer < 2500) {
-            m_drive.driveStop(); // Stop driving
+            driveSpeed = 0.0; // Stop driving
+            //m_drive.driveStop(); // Stop driving
             m_shooter.fireShooterOnly(); // Spin up shooter
         }
     
@@ -59,6 +65,7 @@ public class CenterAuto extends Command{
     @Override
     public void end(boolean interrupted) {
         m_shooter.intakeAndShooterStop(); // Stop shooting
+        driveSpeed = 0.0; // Stop driving
         m_drive.driveStop(); // Stop driving
     }
 
