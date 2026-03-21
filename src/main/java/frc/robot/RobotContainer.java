@@ -44,6 +44,8 @@ public class RobotContainer {
   public RightAuto rightAuto =  new RightAuto(m_shooter, m_drive);
   public NoAuto noAuto = new NoAuto(/*m_shooter, m_drive*/);
 
+  public final move move = new move(m_drive, driverController);
+
   private final intakeIn intakeIn = new intakeIn(m_shooter);
   private final intakeOut intakeOut = new intakeOut(m_shooter);
   private final shooterFire shooterFire = new shooterFire(m_shooter);
@@ -55,7 +57,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    m_drive.setDefaultCommand(new move(m_drive, driverController)); // drive with controller input
+    m_drive.setDefaultCommand(move); // drive with controller input
   }
 
   /**
