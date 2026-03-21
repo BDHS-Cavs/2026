@@ -52,7 +52,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    //not working m_drive.setDefaultCommand(new move()); // drive with controller input
+    m_drive.setDefaultCommand(new move(m_drive, driverController)); // drive with controller input
   }
 
   /**
@@ -84,12 +84,12 @@ public class RobotContainer {
 
 Match timings:
 2:45 - 2:25 Auto (both active) "AUTO"
-2:25 - 2:20 Wait 5 seconds "TRANSITION"
-2:20 - 2:10 Both active "SHIFT_1"
-2:10 - 1:45 Auto loser active "SHIFT_2"
-1:45 - 1:20 Trade active "SHIFT_3"
-1:20 - 0:55 Trade active "SHIFT_4"
-0:55 - 0:30 Trade active "SHIFT_5"
+2:25 - 2:20 Wait 5 seconds "DELAY"
+2:20 - 2:10 Both active "TRANSITION"
+2:10 - 1:45 Auto loser active "SHIFT_1"
+1:45 - 1:20 Trade active "SHIFT_2"
+1:20 - 0:55 Trade active "SHIFT_3"
+0:55 - 0:30 Trade active "SHIFT_4"
 0:30 - 0:00 Both active "ENDGAME"
 
 */
@@ -107,25 +107,25 @@ Match timings:
     double time = DriverStation.getMatchTime();
 
     if (time > 145) return "AUTO";
-    if (time > 140) return "TRANSITION";
-    if (time > 130) return "SHIFT_1";
-    if (time > 105) return "SHIFT_2";
-    if (time > 80) return "SHIFT_3";
-    if (time > 55) return "SHIFT_4";
-    if (time > 30) return "SHIFT_5";
+    if (time > 140) return "DELAY";
+    if (time > 130) return "TRANSITION";
+    if (time > 105) return "SHIFT_1";
+    if (time > 80) return "SHIFT_2";
+    if (time > 55) return "SHIFT_3";
+    if (time > 30) return "SHIFT_4";
 
     return "ENDGAME";
   }
 
   public String getHubStatus(String shift) {
-    if(shift.equals("AUTO") || shift.equals("TRANSITION") || shift.equals("ENDGAME")) {
+    if(shift.equals("AUTO") || shift.equals("DELAY") || shift.equals("TRANSITION") || shift.equals("ENDGAME")) {
       return "ACTIVE";
     }
 
     var maybeAlliance = DriverStation.getAlliance();
 
     if(maybeAlliance.isEmpty()) {
-      return "UNKNOWN";
+      return "ACTIVE"; // only if alliance is unknown, default to active
     }
 
     var alliance = maybeAlliance.get();
@@ -144,7 +144,7 @@ Match timings:
       String msg = DriverStation.getGameSpecificMessage();
       
       if(msg.isEmpty()) {
-        return "UNKNOWN";
+        return "ACTIVE"; // only if FMS has not sent auto winner yet, default to active
       }
 
       DriverStation.Alliance autoWinner;
