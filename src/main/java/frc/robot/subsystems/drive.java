@@ -46,8 +46,7 @@ public class drive extends SubsystemBase {
   }
 
   public void move(double x, double y) {
-    double xspeed = x*-0.75; // Limit turning speed to 75% // Invert X axis
-    y *= -1; // Invert Y axis
+    double xspeed = x*0.75; // Limit turning speed to 75%
     drivetrain.arcadeDrive(xspeed, y); // Drive
   }
 

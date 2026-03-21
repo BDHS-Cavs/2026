@@ -24,7 +24,7 @@ public class move extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
-        m_drive.move(driverController.getLeftX(), driverController.getLeftY());
+        m_drive.move(-driverController.getLeftX(), -driverController.getLeftY()); // note: these are negative
     }
 
     // Called once the command ends or is interrupted.

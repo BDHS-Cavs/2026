@@ -36,7 +36,7 @@ public class CenterAuto extends Command{
         
         // 0.5s to 1.5s
         if(timer > 500 && timer < 1500) {
-            m_drive.move(0, 0.5); // Move forwards to get away from the wall
+            m_drive.move(0, 0.5); // Move forwards to get away from the wall // TODO switch to the command so it doesnt complain about motor safety not updated enough
         }
 
         // 1.5s to 2.5s
