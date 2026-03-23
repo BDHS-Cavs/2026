@@ -43,12 +43,12 @@ public class shooter extends SubsystemBase {
   
   public void intakeIn(){
     m_intakeMotor.set(1); // Run Intake (1 speed)
-    m_shooterMotor.set(0.5); // Run Shooter (0.5 speed)
+    m_shooterMotor.set(0.6); // Run Shooter (0.6 speed)
   }
   
   public void intakeOut(){
     m_intakeMotor.set(-1); // Run Intake (Reversed) (-1 speed)
-    m_shooterMotor.set(-0.6); // Run Shooter (Reversed) (-0.6 speed)
+    m_shooterMotor.set(-0.6); // Run Shooter (Reversed) (-0.6 speed) //TODO tune since its going out, maybe make it faster
   }
 
   public void intakeAndShooterStop() {
