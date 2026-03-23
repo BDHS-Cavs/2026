@@ -66,8 +66,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
     SmartDashboard.putData("Commands", CommandScheduler.getInstance());
 
-    SmartDashboard.putString("Match Period", m_robotContainer.getMatchPeriod());
-    SmartDashboard.putBoolean("Hub Active", m_robotContainer.canScore());
+    SmartDashboard.putString("Match Period", m_robotContainer.hubStatus.getMatchPeriod());
+    SmartDashboard.putBoolean("Hub Active", m_robotContainer.hubStatus.canScore());
 
   }
 
@@ -81,6 +81,15 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("No Auto", m_robotContainer.noAuto);
 
     SmartDashboard.putData("Autonomous Chooser", m_chooser);
+
+    m_robotContainer.m_hubStatusChooser = new SendableChooser<Boolean>();
+    
+    m_robotContainer.m_hubStatusChooser.setDefaultOption("With Auto", true);
+    m_robotContainer.m_hubStatusChooser.addOption("No Auto", false);
+
+    SmartDashboard.putData("Hub Status Chooser", m_robotContainer.m_hubStatusChooser);
+
+    m_robotContainer.hubStatus = new HubStatus(m_robotContainer.m_hubStatusChooser);
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
